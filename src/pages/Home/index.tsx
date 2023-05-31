@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 // API
 import api from '../../services/api';
 
+// Types
+import iMovie from '../../types/movie';
+
 // Styles
 import styles from './styles.module.scss';
 
@@ -17,13 +20,13 @@ const loadMovies = async () => {
       language: 'pt-BR',
     },
   });
-  // console.log(response.data.results);
+  console.log(response.data.results);
 
   return response.data.results;
 };
 
 const Home = () => {
-  const [movies, setMovies] = useState<any>();
+  const [movies, setMovies] = useState<iMovie[] | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

@@ -3,7 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // Pages
 import Home from './pages/Home';
 import Movie from './pages/Movie';
-import Header from './assets/components/Header';
+import Header from './components/Header';
+import NotFound from './pages/NotFound';
 
 // Components
 
@@ -14,6 +15,7 @@ const MyRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/filmes/:id" element={<Movie />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

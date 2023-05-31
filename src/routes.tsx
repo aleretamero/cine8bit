@@ -14,7 +14,7 @@ const MyRoutes = () => {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/filmes/:id" element={<Movie />} />
+        <Route path="/filme/:id" element={<Movie />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

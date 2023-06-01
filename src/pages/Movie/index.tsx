@@ -1,10 +1,13 @@
 // Hooks
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
 
 import api from '../../services/api';
 
-const loadMovie = async (id: string): Promise<iMovie | null> => {
+const loadMovie = async (
+  id: string,
+  navigate: NavigateFunction
+): Promise<iMovie | null> => {
   const movie = await api
     .get(`/movie/${id}`, {
       params: {
@@ -14,11 +17,11 @@ const loadMovie = async (id: string): Promise<iMovie | null> => {
     })
     .then(response => {
       const movie: iMovie = response.data;
-      console.log('then aqui', movie);
+      // console.log('then aqui', movie);
       return movie;
     })
     .catch(() => {
-      console.error('Deu ruim aqui');
+      navigate('/', { replace: true });
       return null;
     });
 
@@ -31,20 +34,39 @@ import iMovie from '../../types/movie';
 
 const Movie = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [movie, setMovie] = useState<iMovie | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadMovie(id as string).then(response => {
+    loadMovie(id as string, navigate).then(response => {
       setMovie(response);
-      console.log('useEffect aqui', response);
+      // console.log('useEffect aqui', response);
       setLoading(false);
     });
 
     return () => {
-      console.log('Componente Desmontado');
+      // console.log('Componente Desmontado');
     };
-  }, [id]);
+  }, [id, navigate]);
+
+  const handleClick = () => {
+    const myList = localStorage.getItem('@cine8bit');
+    const moviesSaves: iMovie[] = myList ? JSON.parse(myList) : [];
+
+    if (movie) {
+      const hasMovie = moviesSaves.some(movieSave => movieSave.id === movie.id);
+
+      if (hasMovie) {
+        alert('Este filme já está na lista');
+      } else {
+        moviesSaves.push(movie);
+        localStorage.setItem('@cine8bit', JSON.stringify(moviesSaves));
+        alert('Filme Salvo com sucesso');
+      }
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -61,9 +83,16 @@ const Movie = () => {
           <strong>Avaliação: {movie.vote_average.toFixed(1)} / 10</strong>
 
           <div className={styles.areaButtons}>
-            <button>Salvar</button>
+            <button onClick={handleClick}>Salvar</button>
             <button>
-              <a href="#">Trailer</a>
+              <a
+                target="_blank"
+                rel="external"
+                devicon-nodejs-plaindevicon-nodejs-plain
+                href={`https://youtube.com/results?search_query=${movie.title} Trailer`}
+              >
+                Trailer
+              </a>
             </button>
           </div>
         </div>

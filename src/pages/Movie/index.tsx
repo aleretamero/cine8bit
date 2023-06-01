@@ -1,8 +1,13 @@
 // Hooks
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import api from '../../services/api';
+
+// Styles
+import styles from './styles.module.scss';
+import iMovie from '../../types/movie';
 
 const loadMovie = async (
   id: string,
@@ -27,10 +32,6 @@ const loadMovie = async (
 
   return movie;
 };
-
-// Styles
-import styles from './styles.module.scss';
-import iMovie from '../../types/movie';
 
 const Movie = () => {
   const { id } = useParams();
@@ -59,11 +60,11 @@ const Movie = () => {
       const hasMovie = moviesSaves.some(movieSave => movieSave.id === movie.id);
 
       if (hasMovie) {
-        alert('Este filme já está na lista');
+        toast.warn('Esse filme já está na sua lista!');
       } else {
         moviesSaves.push(movie);
         localStorage.setItem('@cine8bit', JSON.stringify(moviesSaves));
-        alert('Filme Salvo com sucesso');
+        toast.success('Filme salvo com sucesso!');
       }
     }
   };

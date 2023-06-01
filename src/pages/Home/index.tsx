@@ -20,7 +20,6 @@ const loadMovies = async () => {
       language: 'pt-BR',
     },
   });
-  console.log(response.data.results);
 
   return response.data.results;
 };

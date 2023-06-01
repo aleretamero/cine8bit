@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Movie from './pages/Movie';
 import Header from './components/Header';
 import NotFound from './pages/NotFound';
+import Favorits from './pages/Favorits';
 
 // Components
 
@@ -15,6 +16,7 @@ const MyRoutes = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/filme/:id" element={<Movie />} />
+        <Route path="/favoritos" element={<Favorits />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

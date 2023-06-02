@@ -31,6 +31,7 @@ const Home = () => {
 
   return (
     <Styled.Container>
+      <Styled.Title>Filmes em cartaz</Styled.Title>
       {loading && <Styled.Loading>Carregando filmes...</Styled.Loading>}
       {!loading && movies && (
         <Styled.ListMovies>

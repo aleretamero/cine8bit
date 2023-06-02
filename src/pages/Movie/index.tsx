@@ -1,3 +1,5 @@
+import * as Styled from './styles';
+
 // Hooks
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, NavigateFunction } from 'react-router-dom';
@@ -5,8 +7,6 @@ import { toast } from 'react-toastify';
 
 import api from '../../services/api';
 
-// Styles
-import styles from './styles.module.scss';
 import iMovie from '../../types/movie';
 
 const loadMovie = async (
@@ -22,7 +22,6 @@ const loadMovie = async (
     })
     .then(response => {
       const movie: iMovie = response.data;
-      // console.log('then aqui', movie);
       return movie;
     })
     .catch(() => {
@@ -43,7 +42,6 @@ const Movie = () => {
   useEffect(() => {
     loadMovie(id as string, navigate).then(response => {
       setMovie(response);
-      // console.log('useEffect aqui', response);
       setLoading(false);
     });
 
@@ -70,12 +68,12 @@ const Movie = () => {
   };
 
   return (
-    <div className={styles.container}>
-      {loading && <p className={styles.loading}>Carregando detalhes...</p>}
-      {!loading && movie && (
-        <div className={styles.movieInfo}>
+    <Styled.Container>
+      {loading && <Styled.Loading>Carregando detalhes...</Styled.Loading>}
+      {!loading && movie && movie.vote_average && (
+        <Styled.MovieInfo>
           <h1>{movie.title}</h1>
-          <img
+          <Styled.MovieImg
             src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
             alt={movie.title}
           />
@@ -83,9 +81,9 @@ const Movie = () => {
           <p>{movie.overview}</p>
           <strong>Avaliação: {movie.vote_average.toFixed(1)} / 10</strong>
 
-          <div className={styles.areaButtons}>
-            <button onClick={handleClick}>Salvar</button>
-            <button>
+          <Styled.ContainerButtons>
+            <Styled.Button onClick={handleClick}>Salvar</Styled.Button>
+            <Styled.Button>
               <a
                 target="_blank"
                 rel="external"
@@ -94,11 +92,11 @@ const Movie = () => {
               >
                 Trailer
               </a>
-            </button>
-          </div>
-        </div>
+            </Styled.Button>
+          </Styled.ContainerButtons>
+        </Styled.MovieInfo>
       )}
-    </div>
+    </Styled.Container>
   );
 };
 

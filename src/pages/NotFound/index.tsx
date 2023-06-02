@@ -1,14 +1,13 @@
-import { Link } from 'react-router-dom';
-import styles from './styles.module.scss';
+import * as Styled from './styles';
 
-const NOtFound = () => {
+const NotFound = () => {
   return (
-    <div className={styles.notFound}>
-      <h1>404</h1>
+    <Styled.Container>
+      <Styled.Title>404</Styled.Title>
       <h2>Pagina não encontrada!</h2>
-      <Link to="/">Veja todos os filmes!</Link>
-    </div>
+      <Styled.LinkMovie to="/">Veja todos os filmes!</Styled.LinkMovie>
+    </Styled.Container>
   );
 };
 
-export default NOtFound;
+export default NotFound;

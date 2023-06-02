@@ -1,8 +1,8 @@
+import * as Styled from './styles';
+
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
-import styles from './styles.module.scss';
 
 import iMovie from '../../types/movie';
 
@@ -33,7 +33,7 @@ const Favorits = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <Styled.Container>
       <h1>Favoritos</h1>
       {!movies && (
         <div>
@@ -43,17 +43,17 @@ const Favorits = () => {
       {movies && (
         <ul>
           {movies.map(movie => (
-            <li key={movie.id}>
+            <Styled.Movie key={movie.id}>
               <span>{movie.title}</span>
               <div>
                 <Link to={`/filme/${movie.id}`}>Ver Detalhes</Link>
                 <button onClick={() => handleClick(movie.id)}>Excluir</button>
               </div>
-            </li>
+            </Styled.Movie>
           ))}
         </ul>
       )}
-    </div>
+    </Styled.Container>
   );
 };
 

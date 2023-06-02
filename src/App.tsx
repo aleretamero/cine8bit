@@ -1,3 +1,8 @@
+import { GlobalStyle } from './global/styles/Global';
+
+import { ThemeProvider } from 'styled-components';
+import { darkTheme, lightTheme } from './global/styles/Theme';
+
 import MyRoutes from './routes';
 
 // Toastify
@@ -6,10 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
-    <div className="app">
+    <ThemeProvider theme={lightTheme}>
+      <GlobalStyle />
       <ToastContainer autoClose={3000} theme="dark" />
       <MyRoutes />
-    </div>
+    </ThemeProvider>
   );
 }
 

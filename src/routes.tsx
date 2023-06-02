@@ -3,11 +3,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // Pages
 import Home from './pages/Home';
 import Movie from './pages/Movie';
-import Header from './components/Header';
 import NotFound from './pages/NotFound';
 import Favorits from './pages/Favorits';
 
 // Components
+import Header from './components/Header';
 
 const MyRoutes = () => {
   return (

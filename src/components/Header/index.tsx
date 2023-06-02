@@ -1,18 +1,17 @@
+import * as Styled from './styles';
 import { Link } from 'react-router-dom';
-
-import styles from './styles.module.scss';
+import Logo from '../Logo';
 
 const Header = () => {
   return (
-    <header className={styles.header}>
+    <Styled.Header>
       <Link to="/">
-        <h1 className={styles.logo}>Cine 8Bit</h1>
+        <Logo />
       </Link>
-      <nav className={styles.navbar}>
-        <Link to="/">Home</Link>
+      <Styled.Navbar>
         <Link to="/favoritos">Favoritos</Link>
-      </nav>
-    </header>
+      </Styled.Navbar>
+    </Styled.Header>
   );
 };
 

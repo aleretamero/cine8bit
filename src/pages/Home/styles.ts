@@ -6,7 +6,12 @@ export const Container = styled.section`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
   padding: 2rem;
+`;
+
+export const Title = styled.h1`
+  font-size: 3rem;
 `;
 
 export const ListMovies = styled.ul`

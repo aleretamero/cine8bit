@@ -10,3 +10,11 @@ declare module 'styled-components' {
     };
   }
 }
+
+// import { darkTheme } from './Theme';
+
+// type MyDefaultTheme = typeof darkTheme
+
+// declare module 'styled-components' {
+//   export interface DefaultTheme extends MyDefaultTheme {}
+// }

@@ -18,7 +18,7 @@ export const Title = styled.h1`
   font-size: 3rem;
 
   @media (max-width: 475px) {
-  font-size: 2rem;
+    font-size: 2rem;
   }
 `;
 
@@ -28,10 +28,6 @@ export const ListMovies = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 2rem;
-
-  @media (max-width: 425px) {
-    gap: 1rem;
-  }
 `;
 
 export const Loading = styled.p`

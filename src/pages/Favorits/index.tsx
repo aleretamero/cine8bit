@@ -4,54 +4,59 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import Button from '../../components/Button';
 import iMovie from '../../types/movie';
 
 const Favorits = () => {
-  const [movies, setMovies] = useState<iMovie[] | null>(null);
+  const [movies, setMovies] = useState<iMovie[]>([]);
 
   useEffect(() => {
     const moviesStorage = localStorage.getItem('@cine8bit');
     const moviesList: iMovie[] = moviesStorage
       ? JSON.parse(moviesStorage)
-      : null;
+      : [];
 
     setMovies(moviesList);
   }, []);
 
   const handleClick = (id: number) => {
-    if (movies) {
-      const moviesFiltered = movies.filter(movie => movie.id !== id);
+    const moviesFiltered = movies.filter(movie => movie.id !== id);
 
-      setMovies(moviesFiltered);
-      localStorage.setItem('@cine8bit', JSON.stringify(moviesFiltered));
-      if (moviesFiltered.length === 0) {
-        localStorage.removeItem('@cine8bit');
-      }
-
-      toast.success('Filme removido com sucesso!');
+    setMovies(moviesFiltered);
+    localStorage.setItem('@cine8bit', JSON.stringify(moviesFiltered));
+    if (moviesFiltered.length === 0) {
+      localStorage.removeItem('@cine8bit');
     }
+
+    toast.success('Filme removido com sucesso!');
   };
 
   return (
     <Styled.Container>
-      <h1>Favoritos</h1>
-      {!movies && (
-        <div>
-          <p>Você não possui filmes salvos :&#40;</p>
-        </div>
+      <Styled.Title>Favoritos</Styled.Title>
+      {movies.length === 0 && (
+        <Styled.NoMovies>Você não possui filmes salvos :&#40;</Styled.NoMovies>
       )}
-      {movies && (
-        <ul>
+      {movies.length > 0 && (
+        <Styled.ContainerMovies>
           {movies.map(movie => (
             <Styled.Movie key={movie.id}>
-              <span>{movie.title}</span>
-              <div>
-                <Link to={`/filme/${movie.id}`}>Ver Detalhes</Link>
-                <button onClick={() => handleClick(movie.id)}>Excluir</button>
-              </div>
+              <Styled.MovieTitle>{movie.title}</Styled.MovieTitle>
+              <Styled.ContainerButtons>
+                <Button colorPrimary="#05062d" colorSecundary="#5b42f3">
+                  <Link to={`/filme/${movie.id}`}>Detalhes</Link>
+                </Button>
+                <Button
+                  onClick={() => handleClick(movie.id)}
+                  colorPrimary="#8C031C"
+                  colorSecundary="#F20F38"
+                >
+                  Excluir
+                </Button>
+              </Styled.ContainerButtons>
             </Styled.Movie>
           ))}
-        </ul>
+        </Styled.ContainerMovies>
       )}
     </Styled.Container>
   );

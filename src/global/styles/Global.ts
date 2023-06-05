@@ -13,6 +13,10 @@ a {
   text-decoration: inherit;
 }
 
+ul, ol {
+  list-style: none;
+}
+
 body {
   font-family: Ubuntu, sans-serif;
   background-color: ${props => props.theme.colors.background};

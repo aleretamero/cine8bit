@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import api from '../../services/api';
 
 import iMovie from '../../types/movie';
+import Button from '../../components/Button';
 
 const loadMovie = async (
   id: string,
@@ -71,30 +72,37 @@ const Movie = () => {
     <Styled.Container>
       {loading && <Styled.Loading>Carregando detalhes...</Styled.Loading>}
       {!loading && movie && movie.vote_average && (
-        <Styled.MovieInfo>
-          <h1>{movie.title}</h1>
+        <Styled.ContainerMovie>
           <Styled.MovieImg
             src={`https://image.tmdb.org/t/p/original/${movie.backdrop_path}`}
             alt={movie.title}
           />
-          <h3>Sinopse</h3>
-          <p>{movie.overview}</p>
-          <strong>Avaliação: {movie.vote_average.toFixed(1)} / 10</strong>
-
+          <Styled.MovieInfo>
+            <h2>{movie.title}</h2>
+            <strong>Sinopse</strong>
+            <p>{movie.overview}</p>
+            <strong>Avaliação: {movie.vote_average.toFixed(1)} / 10</strong>
+          </Styled.MovieInfo>
           <Styled.ContainerButtons>
-            <Styled.Button onClick={handleClick}>Salvar</Styled.Button>
-            <Styled.Button>
-              <a
-                target="_blank"
-                rel="external"
-                devicon-nodejs-plaindevicon-nodejs-plain
-                href={`https://youtube.com/results?search_query=${movie.title} Trailer`}
-              >
+            <Button
+              onClick={handleClick}
+              colorPrimary="#05062d"
+              colorSecundary="#5b42f3"
+            >
+              Salvar
+            </Button>
+            <a
+              target="_blank"
+              rel="external"
+              devicon-nodejs-plaindevicon-nodejs-plain
+              href={`https://youtube.com/results?search_query=${movie.title} Trailer`}
+            >
+              <Button colorPrimary="#05062d" colorSecundary="#5b42f3">
                 Trailer
-              </a>
-            </Styled.Button>
+              </Button>
+            </a>
           </Styled.ContainerButtons>
-        </Styled.MovieInfo>
+        </Styled.ContainerMovie>
       )}
     </Styled.Container>
   );

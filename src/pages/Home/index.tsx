@@ -40,7 +40,7 @@ const Home = () => {
               key={movie.id}
               id={movie.id}
               title={movie.title}
-              poster_path={movie.backdrop_path}
+              poster_path={movie.poster_path}
             />
           ))}
         </Styled.ListMovies>

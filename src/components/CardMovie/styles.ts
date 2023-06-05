@@ -1,29 +1,23 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-
 export const CardMovie = styled.li`
   width: 100%;
-  background-color: #222;
-  color: #fff;
+  height: 100%;
+  background-color: #000;
   border-radius: 10px;
   overflow: hidden;
+  transition: all.2s;
+
+  &:hover {
+    scale: 1.05;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
 `;
 
 export const LinkMovie = styled(Link)`
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 1rem;
-  padding-bottom: 1rem;
-  justify-content: center;
-  align-items: center;
-`;
-
-
-export const TitleMovie = styled.h2`
-  text-align: center;
-  font-size: 1.2rem;
-  display: block;
+  width: 100%;
+  height: 100%;
 `;
 
 export const ImgMovie = styled.img`
@@ -31,5 +25,3 @@ export const ImgMovie = styled.img`
   width: 100%;
   object-fit: cover;
 `;
-
-

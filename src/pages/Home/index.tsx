@@ -8,9 +8,11 @@ import * as Styled from './styles';
 import CardMovie from '../../components/CardMovie';
 
 const loadMovies = async () => {
+  const API_KEY = import.meta.env.VITE_API_KEY;
+
   const response = await api.get('movie/now_playing', {
     params: {
-      api_key: '2c5fc2d3aec63eb3ccae326eb2c6d8b7',
+      api_key: API_KEY,
       language: 'pt-BR',
     },
   });
@@ -23,7 +25,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadMovies().then(result => {
+    loadMovies().then((result) => {
       setMovies(result);
       setLoading(false);
     });
@@ -35,7 +37,7 @@ const Home = () => {
       {loading && <Styled.Loading>Carregando filmes...</Styled.Loading>}
       {!loading && movies && (
         <Styled.ListMovies>
-          {movies.map(movie => (
+          {movies.map((movie) => (
             <CardMovie
               key={movie.id}
               id={movie.id}

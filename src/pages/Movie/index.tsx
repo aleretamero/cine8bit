@@ -14,14 +14,16 @@ const loadMovie = async (
   id: string,
   navigate: NavigateFunction
 ): Promise<iMovie | null> => {
+  const API_KEY = import.meta.env.VITE_API_KEY;
+
   const movie = await api
     .get(`/movie/${id}`, {
       params: {
-        api_key: '2c5fc2d3aec63eb3ccae326eb2c6d8b7',
+        api_key: API_KEY,
         language: 'pt-BR',
       },
     })
-    .then(response => {
+    .then((response) => {
       const movie: iMovie = response.data;
       return movie;
     })
@@ -41,7 +43,7 @@ const Movie = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    loadMovie(id as string, navigate).then(response => {
+    loadMovie(id as string, navigate).then((response) => {
       setMovie(response);
       setLoading(false);
     });
@@ -56,7 +58,9 @@ const Movie = () => {
     const moviesSaves: iMovie[] = myList ? JSON.parse(myList) : [];
 
     if (movie) {
-      const hasMovie = moviesSaves.some(movieSave => movieSave.id === movie.id);
+      const hasMovie = moviesSaves.some(
+        (movieSave) => movieSave.id === movie.id
+      );
 
       if (hasMovie) {
         toast.warn('Esse filme já está na sua lista!');

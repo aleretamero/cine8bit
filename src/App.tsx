@@ -14,11 +14,11 @@ function App() {
   const { themeStorage } = useThemeContext() as TypeThemeContext;
 
   return (
-    <ThemeProvider theme={themeStorage ? darkTheme : lightTheme}>
+    <ThemeProvider theme={themeStorage ? lightTheme : darkTheme}>
       <GlobalStyle />
       <ToastContainer
         autoClose={3000}
-        theme={themeStorage ? 'light' : 'dark'}
+        theme={themeStorage ? 'dark' : 'light'}
       />
       <MyRoutes />
     </ThemeProvider>

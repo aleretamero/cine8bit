@@ -7,20 +7,18 @@ import { toast } from 'react-toastify';
 import Button from '../../components/Button';
 import iMovie from '../../types/movie';
 
-const Favorits = () => {
+const Favorites = () => {
   const [movies, setMovies] = useState<iMovie[]>([]);
 
   useEffect(() => {
     const moviesStorage = localStorage.getItem('@cine8bit');
-    const moviesList: iMovie[] = moviesStorage
-      ? JSON.parse(moviesStorage)
-      : [];
+    const moviesList: iMovie[] = moviesStorage ? JSON.parse(moviesStorage) : [];
 
     setMovies(moviesList);
   }, []);
 
   const handleClick = (id: number) => {
-    const moviesFiltered = movies.filter(movie => movie.id !== id);
+    const moviesFiltered = movies.filter((movie) => movie.id !== id);
 
     setMovies(moviesFiltered);
     localStorage.setItem('@cine8bit', JSON.stringify(moviesFiltered));
@@ -39,7 +37,7 @@ const Favorits = () => {
       )}
       {movies.length > 0 && (
         <Styled.ContainerMovies>
-          {movies.map(movie => (
+          {movies.map((movie) => (
             <Styled.Movie key={movie.id}>
               <Styled.MovieTitle>{movie.title}</Styled.MovieTitle>
               <Styled.ContainerButtons>
@@ -62,4 +60,4 @@ const Favorits = () => {
   );
 };
 
-export default Favorits;
+export default Favorites;
